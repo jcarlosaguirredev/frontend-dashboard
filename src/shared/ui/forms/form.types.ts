@@ -2,6 +2,7 @@ export type FieldType = "text" | "email" | "select" | "checkbox";
 
 export interface BaseFieldConfig {
   label: string;
+  required?: boolean;
 }
 
 export interface TextFieldConfig extends BaseFieldConfig {
@@ -16,7 +17,6 @@ export interface SelectFieldConfig extends BaseFieldConfig {
 
 export interface CheckboxFieldConfig extends BaseFieldConfig {
   type: "checkbox";
-  required?: boolean;
 }
 
 export type FieldConfig =

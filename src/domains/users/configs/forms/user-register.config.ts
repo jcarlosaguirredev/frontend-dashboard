@@ -1,4 +1,4 @@
-import { FieldConfig } from "../../../../shared/components/forms/form.types";
+import { FieldConfig } from "../../../../shared/ui/forms/form.types";
 
 export const userRegisterFormConfig: Record<string, FieldConfig> = {
   email: {
@@ -9,6 +9,7 @@ export const userRegisterFormConfig: Record<string, FieldConfig> = {
   name: {
     type: "text",
     label: "Name",
+    required: true,
     placeholder: "Ingresa tu nombre",
   },
   lastName: {

@@ -1,4 +1,4 @@
-import { userRegisterFormConfig } from "@/domains/users/components/forms/user-register.config";
+import { userRegisterFormConfig } from "@/domains/users/configs/forms/user-register.config";
 import { z } from "zod";
 
 export const formSchema = z.object(
@@ -9,10 +9,20 @@ export const formSchema = z.object(
           return [key, z.email({ message: "Invalid email address" })];
 
         case "text":
-          return [key, z.string().min(1, { message: "Field is required" })];
+          return [
+            key,
+            field.required
+              ? z.string().min(1, { message: "Field is required" })
+              : z.string().optional(),
+          ];
 
         case "select":
-          return [key, z.string().min(1, "Selecciona una opción")];
+          return [
+            key,
+            field.required
+              ? z.string().min(1, "Selecciona una opción")
+              : z.string().optional(),
+          ];
 
         case "checkbox":
           return [

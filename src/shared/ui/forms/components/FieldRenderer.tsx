@@ -1,9 +1,9 @@
+import { TextInput } from "@/shared/ui/forms/components/inputs/TextInput";
+import { SelectInput } from "@/shared/ui/forms/components/inputs/SelectInput";
+import { CheckboxInput } from "@/shared/ui/forms/components/inputs/CheckboxInput";
+import { FormSchema } from "@/shared/ui/forms/form.schema";
+import { FieldConfig } from "@/shared/ui/forms/form.types";
 import { UseFormRegister, FieldErrors } from "react-hook-form";
-import { FormSchema } from "./form.schema";
-import { FieldConfig } from "./form.types";
-import { TextInput } from "./inputs/TextInput";
-import { SelectInput } from "@/shared/components/forms/inputs/SelectInput";
-import { CheckboxInput } from "@/shared/components/forms/inputs/CheckboxInput";
 
 type Props = {
   name: string;

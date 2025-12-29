@@ -2,20 +2,16 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FieldRenderer } from "./FieldRenderer";
-import { FieldConfig } from "@/shared/components/forms/form.types";
-import { useUserStore } from "@/domains/users/user.store";
-import { UserStore } from "@/domains/users/user.store";
-import { formSchema, FormSchema } from "@/shared/components/forms/form.schema";
-import { User } from "@/domains/users/user.type";
+import { FieldConfig } from "@/shared/ui/forms/form.types";
+import { formSchema, FormSchema } from "@/shared/ui/forms/form.schema";
+import { FieldRenderer } from "@/shared/ui/forms/components/FieldRenderer";
 
 type Props = {
   formConfig: Record<string, FieldConfig>;
+  onSubmit: (data: FormSchema) => void;
 };
 
-export function DynamicForm({ formConfig }: Props) {
-  const setUser = useUserStore((state: UserStore) => state.setUser);
-
+export function DynamicForm({ formConfig, onSubmit }: Props) {
   const {
     register,
     handleSubmit,
@@ -23,11 +19,6 @@ export function DynamicForm({ formConfig }: Props) {
   } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
   });
-
-  const onSubmit = (data: FormSchema) => {
-    console.log("FormRHF -> Submit dinámico:", data);
-    setUser(data as User);
-  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

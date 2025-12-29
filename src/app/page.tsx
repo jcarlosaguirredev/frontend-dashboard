@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { DynamicForm } from "../shared/components/forms/FormRHF";
-import { userRegisterFormConfig } from "@/domains/users/components/forms/user-register.config";
-import { useUserStore } from "@/domains/users/user.store";
+import { userRegisterFormConfig, useUserStore } from "@/domains/users";
+import { DynamicForm } from "@/shared/ui/forms";
 
 export default function Home() {
   const user = useUserStore((state) => state.user);
@@ -13,6 +12,10 @@ export default function Home() {
     console.log("Page -> Home Component Mounted");
   });
 
+  const onSubmit = (data: any) => {
+    console.log("Page -> Form submitted with data:", data);
+  };
+
   return (
     <main className="p-6 space-y-4">
       {user && (
@@ -21,7 +24,7 @@ export default function Home() {
           <pre>{JSON.stringify(user, null, 2)}</pre>
         </div>
       )}
-      <DynamicForm formConfig={userRegisterFormConfig} />
+      <DynamicForm formConfig={userRegisterFormConfig} onSubmit={onSubmit} />
     </main>
   );
 }
