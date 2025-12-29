@@ -17,7 +17,7 @@ export function DynamicForm({ formConfig, onSubmit }: Props) {
     handleSubmit,
     formState: { errors },
   } = useForm<FormSchema>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema(formConfig)),
   });
 
   return (

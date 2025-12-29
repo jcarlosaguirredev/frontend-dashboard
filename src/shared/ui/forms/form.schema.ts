@@ -1,44 +1,44 @@
-import { userRegisterFormConfig } from "@/domains/users/configs/forms/user-register.config";
+import { FormConfig } from "@/shared/ui/forms/form.types";
 import { z } from "zod";
+import { FormSchema } from "../../components/forms/form.schema";
 
-export const formSchema = z.object(
-  Object.fromEntries(
-    Object.entries(userRegisterFormConfig).map(([key, field]) => {
-      switch (field.type) {
-        case "email":
-          return [key, z.email({ message: "Invalid email address" })];
+export const formSchema = (config: FormConfig) => {
+  const shape = {} as Record<string, z.ZodTypeAny>;
 
-        case "text":
-          return [
-            key,
-            field.required
-              ? z.string().min(1, { message: "Field is required" })
-              : z.string().optional(),
-          ];
+  for (const [key, field] of Object.entries(config)) {
+    switch (field.type) {
+      case "email":
+        shape[key] = z.email({
+          message: "Invalid email address",
+        });
+        break;
 
-        case "select":
-          return [
-            key,
-            field.required
-              ? z.string().min(1, "Selecciona una opción")
-              : z.string().optional(),
-          ];
+      case "text":
+        shape[key] = field.required
+          ? z.string().min(1, { message: "Field is required" })
+          : z.string().optional();
+        break;
 
-        case "checkbox":
-          return [
-            key,
-            field.required
-              ? z.boolean().refine((v) => v === true, {
-                  message: "Debes aceptar",
-                })
-              : z.boolean().optional(),
-          ];
+      case "select":
+        shape[key] = field.required
+          ? z.string().min(1, "Selecciona una opción")
+          : z.string().optional();
+        break;
 
-        default:
-          return [key, z.any()];
-      }
-    })
-  )
-);
+      case "checkbox":
+        shape[key] = field.required
+          ? z.boolean().refine((v) => v === true, {
+              message: "Debes aceptar",
+            })
+          : z.boolean().optional();
+        break;
 
-export type FormSchema = z.infer<typeof formSchema>;
+      default:
+        shape[key] = z.any();
+    }
+  }
+
+  return z.object(shape);
+};
+
+export type FormSchema = z.infer<ReturnType<typeof formSchema>>;
