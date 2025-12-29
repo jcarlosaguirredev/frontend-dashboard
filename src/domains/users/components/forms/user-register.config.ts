@@ -1,6 +1,6 @@
-import { FieldConfig } from "./form.types";
+import { FieldConfig } from "../../../../shared/components/forms/form.types";
 
-export const formConfig: Record<string, FieldConfig> = {
+export const userRegisterFormConfig: Record<string, FieldConfig> = {
   email: {
     type: "email",
     label: "Email",

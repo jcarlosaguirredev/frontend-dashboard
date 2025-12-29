@@ -1,9 +1,9 @@
-import { formConfig } from "@/app/forms/form.config";
+import { userRegisterFormConfig } from "@/domains/users/components/forms/user-register.config";
 import { z } from "zod";
 
 export const formSchema = z.object(
   Object.fromEntries(
-    Object.entries(formConfig).map(([key, field]) => {
+    Object.entries(userRegisterFormConfig).map(([key, field]) => {
       switch (field.type) {
         case "email":
           return [key, z.email({ message: "Invalid email address" })];
