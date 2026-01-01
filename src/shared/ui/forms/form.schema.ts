@@ -1,6 +1,5 @@
 import { FormConfig } from "@/shared/ui/forms/form.types";
 import { z } from "zod";
-import { FormSchema } from "../../components/forms/form.schema";
 
 export const formSchema = (config: FormConfig) => {
   const shape = {} as Record<string, z.ZodTypeAny>;

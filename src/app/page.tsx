@@ -24,6 +24,7 @@ export default function Home() {
           <pre>{JSON.stringify(user, null, 2)}</pre>
         </div>
       )}
+      {user && <p>Welcome back, {user.name}!</p>}
       <DynamicForm formConfig={userRegisterFormConfig} onSubmit={onSubmit} />
     </main>
   );
