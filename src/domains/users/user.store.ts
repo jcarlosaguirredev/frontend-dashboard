@@ -9,6 +9,7 @@ export type UserStore = {
   user: User | null;
   status: AsyncStatus;
   error: string | null;
+  setUser: (user: User) => void;
   loadUser: () => Promise<void>;
   clearUser: () => void;
 };
@@ -19,6 +20,7 @@ export const useUserStore = create<UserStore>((set) => ({
   user: null,
   status: "idle",
   error: null,
+  setUser: (user: User) => set({ user }),
   loadUser: async () => {
     // Check if user is already loaded
     const { user } = useUserStore.getState();
